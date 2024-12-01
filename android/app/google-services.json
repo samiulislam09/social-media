@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "594594272443",
+    "project_id": "cocial-media-1bbf2",
+    "storage_bucket": "cocial-media-1bbf2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594594272443:android:8704b7f26bbb42ab09059e",
+        "android_client_info": {
+          "package_name": "com.example.social_media"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYU_iSGhhjzOJyNRMmOoRl3_KrG51EJkA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
