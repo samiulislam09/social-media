@@ -14,7 +14,6 @@ class FirebaseAuthRepo implements AuthRepo {
           name: userCredential.user!.displayName!);
       return appUser;
     } catch (e) {
-      print(e);
       throw Exception(e);
     }
   }
