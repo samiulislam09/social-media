@@ -3,10 +3,11 @@ import 'package:social_media/features/auth/domain/entities/app_user.dart';
 import 'package:social_media/features/auth/domain/repository/auth_repo.dart';
 
 class FirebaseAuthRepo implements AuthRepo {
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   @override
   Future<AppUser> loginWithEmailPassword(String email, String password) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
+      UserCredential userCredential = await firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
       AppUser appUser = AppUser(
           uid: userCredential.user!.uid,
@@ -20,7 +21,7 @@ class FirebaseAuthRepo implements AuthRepo {
 
   @override
   Future<AppUser> getCurrentUser() async {
-    final User? user = FirebaseAuth.instance.currentUser;
+    final User? user = firebaseAuth.currentUser;
     if (user != null) {
       AppUser appUser =
           AppUser(uid: user.uid, email: user.email!, name: user.displayName!);
@@ -32,14 +33,14 @@ class FirebaseAuthRepo implements AuthRepo {
 
   @override
   Future<void> logout() async {
-    return await FirebaseAuth.instance.signOut();
+    return await firebaseAuth.signOut();
   }
 
   @override
   Future<AppUser> registerWithEmailPassword(
       String email, String password) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
+      UserCredential userCredential = await firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
       AppUser appUser = AppUser(
           uid: userCredential.user!.uid,

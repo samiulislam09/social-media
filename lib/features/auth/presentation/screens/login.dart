@@ -1,8 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social_media/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:social_media/features/auth/presentation/screens/register.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  void login() {
+    final String email = emailController.text;
+    final String password = passwordController.text;
+
+    final authCubit = context.read<AuthCubit>();
+
+    if (email.isNotEmpty && password.isNotEmpty) {
+      authCubit.login(email, password);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Please fill all fields"),
+        ),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +59,7 @@ class Login extends StatelessWidget {
                 height: 60,
                 width: double.infinity,
                 child: TextField(
+                  controller: emailController,
                   decoration: InputDecoration(
                     hintText: "Email",
                     border: OutlineInputBorder(),
@@ -36,6 +71,7 @@ class Login extends StatelessWidget {
                 height: 60,
                 width: double.infinity,
                 child: TextField(
+                  controller: passwordController,
                   obscureText: true,
                   autocorrect: false,
                   decoration: InputDecoration(
@@ -47,7 +83,7 @@ class Login extends StatelessWidget {
               const SizedBox(height: 20),
               GestureDetector(
                 onTap: () {
-                  print("hello");
+                  login();
                 },
                 child: Container(
                   height: 50,

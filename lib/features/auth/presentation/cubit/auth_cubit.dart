@@ -10,20 +10,20 @@ class AuthCubit extends Cubit<AuthState> {
   late AppUser _appUser;
   AuthCubit({required this.authRepo}) : super(AuthInitial());
 
-  void loginWithEmailPassword(String email, String password) async {
+  void login(String email, String password) async {
     emit(AuthLoading());
     try {
-      _appUser = await authRepo.loginWithEmailPassword(email, password);
+      _appUser = (await authRepo.loginWithEmailPassword(email, password))!;
       emit(Authenticated(appUser: _appUser));
     } catch (e) {
       emit(AuthError(message: e.toString()));
     }
   }
 
-  void registerWithEmailPassword(String email, String password) async {
+  void register(String email, String password) async {
     emit(AuthLoading());
     try {
-      _appUser = await authRepo.registerWithEmailPassword(email, password);
+      _appUser = (await authRepo.registerWithEmailPassword(email, password))!;
       emit(Authenticated(appUser: _appUser));
     } catch (e) {
       emit(AuthError(message: e.toString()));
@@ -33,7 +33,7 @@ class AuthCubit extends Cubit<AuthState> {
   void getCurrentUser() async {
     emit(AuthLoading());
     try {
-      _appUser = await authRepo.getCurrentUser();
+      _appUser = (await authRepo.getCurrentUser())!;
       emit(Authenticated(appUser: _appUser));
     } catch (e) {
       emit(AuthError(message: e.toString()));
@@ -53,7 +53,7 @@ class AuthCubit extends Cubit<AuthState> {
   void checkAuthStatus() async {
     emit(AuthLoading());
     try {
-      _appUser = await authRepo.getCurrentUser();
+      _appUser = (await authRepo.getCurrentUser())!;
       emit(Authenticated(appUser: _appUser));
     } catch (e) {
       emit(UnAuthenticated());
