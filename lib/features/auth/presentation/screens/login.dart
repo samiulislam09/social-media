@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_media/features/auth/presentation/screens/register.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -72,7 +73,8 @@ class Login extends StatelessWidget {
                   Text("Don't have an account?"),
                   TextButton(
                     onPressed: () {
-                      print("hello");
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Register()));
                     },
                     child: Text("Register"),
                   )
